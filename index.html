@@ -3,64 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber-ScareCrow Wiki</title>
+    <title>Cyber-ScareCrow Wiki & Downloads</title>
     <style>
-        body { background-color: #1a1b26; color: #a9b1d6; font-family: 'Consolas', monospace; text-align: center; margin: 0; padding: 50px; }
-        h1 { color: #ff9e64; }
-        h2 { color: #7aa2f7; margin-top: 40px; }
-        p, li { color: #9ece6a; font-size: 1.1rem; line-height: 1.6; text-align: left; max-width: 800px; margin: 10px auto; }
-        img.banner { max-width: 100%; height: auto; border-radius: 30px; margin-top: 20px; }
-        img.icon { max-width: 150px; border-radius: 30px; }
-        .btn { color: #1a1b26; background-color: #7aa2f7; text-decoration: none; border: none; padding: 15px 30px; border-radius: 5px; display: inline-block; margin: 20px; font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: background-color 0.3s; }
-        .btn:hover { background-color: #8db0f8; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        /* Gruvbox Dark Theme */
+        body { 
+            background-color: #282828; 
+            color: #ebdbb2; 
+            font-family: 'Consolas', 'JetBrains Mono', monospace; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
+            line-height: 1.6;
+        }
+        h1 { color: #fe8019; font-size: 2.5rem; margin-bottom: 10px; }
+        h2 { color: #83a598; }
+        p { color: #b8bb26; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .btn { 
+            background-color: #fe8019; 
+            color: #282828; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1.2rem;
+            display: inline-block; 
+            margin: 15px 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid #fe8019;
+        }
+        .btn:hover { background-color: #d65d0e; border-color: #d65d0e; transform: translateY(-2px); }
+        .btn-outline {
+            background-color: transparent;
+            color: #fe8019;
+        }
+        .btn-outline:hover {
+            background-color: #fe8019;
+            color: #282828;
+        }
+        img.banner { max-width: 100%; height: auto; border-radius: 15px; margin-top: 30px; }
+        img.icon { max-width: 120px; border-radius: 20px; margin-bottom: 10px; }
+        .links a { color: #83a598; text-decoration: none; margin: 0 10px; }
+        .links a:hover { text-decoration: underline; color: #fe8019; }
+        
+        /* Mobile Compatibility */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .btn { width: 100%; box-sizing: border-box; margin: 10px 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="icon.png" alt="Cyber-ScareCrow Icon" class="icon">
         <h1>Cyber-ScareCrow</h1>
-        <p style="text-align: center;">100% Libre Offline Active-Analysis Defensive Suite</p>
+        <p>100% Libre Offline Active-Analysis Defensive Suite.</p>
         
         <noscript>
-            <p style="text-align: center; color: #f7768e; border: 1px solid #f7768e; padding: 10px;">JavaScript is disabled. Manual download links are provided below.</p>
+            <p style="color: #fb4934; border: 1px solid #fb4934; padding: 10px;">JavaScript is disabled. Manual download links are provided below.</p>
         </noscript>
 
         <div id="download-section">
-            <a href="https://github.com/tilas01/adv-cyber-malcrow/releases/latest/download/Cyber-ScareCrow-Windows-x64.zip" id="download-btn" class="btn">Download Latest Release</a>
+            <a href="https://github.com/tilas01/Cyber-ScareCrow-Server/releases/latest/download/Cyber-ScareCrow-Release.zip" id="download-btn" class="btn">Download Latest Release</a>
+            <a href="https://github.com/tilas01/Cyber-ScareCrow" id="source-btn" class="btn btn-outline">Build from Source</a>
         </div>
-        <!-- // TODO: add donation link here (Patreon / Buy Me a Coffee) -->
-
-        <h2>Compilation Guide</h2>
-        <p>Cyber-ScareCrow is designed to run securely offline. It consists of a Rust client and a C-based Ring-0 Driver.</p>
         
-        <h3>Windows Client (Rust)</h3>
-        <ul>
-            <li>Install Rustup and Visual Studio Build Tools 2022 (Desktop C++).</li>
-            <li>Run <code>cargo build --release</code> in the client directory.</li>
-        </ul>
-
-        <h3>Ring-0 Driver</h3>
-        <ul>
-            <li>Install the Windows Driver Kit (WDK) and Windows SDK.</li>
-            <li>Open the x64 Native Tools Command Prompt.</li>
-            <li>Run <code>msbuild /p:Configuration=Release /p:Platform=x64</code>.</li>
-            <li>Enable Test-Signing: <code>bcdedit /set testsigning on</code> and reboot.</li>
-        </ul>
+        <div class="links" style="margin-top: 30px;">
+            <a href="https://tilas01.github.io/Cyber-ScareCrow-Wiki">Documentation / Wiki</a> | 
+            <a href="https://github.com/tilas01/Cyber-ScareCrow-Hub">Architecture Hub</a>
+        </div>
         
         <br>
         <img src="banner.png" alt="Cyber-ScareCrow Banner" class="banner">
     </div>
 
     <script>
-        // Simple OS Detection for smart download button
         const platform = navigator.platform.toLowerCase();
+        const userAgent = navigator.userAgent.toLowerCase();
         const btn = document.getElementById('download-btn');
-        if (platform.includes('win')) {
+        const sourceBtn = document.getElementById('source-btn');
+        
+        if (platform.includes('win') || userAgent.includes('windows')) {
             btn.innerHTML = "Download for Windows (x64)";
-        } else if (platform.includes('linux')) {
-            btn.innerHTML = "View Source (Linux Build Tools)";
-            btn.href = "https://github.com/tilas01/adv-cyber-malcrow";
+        } else if (platform.includes('linux') || platform.includes('mac') || userAgent.includes('linux') || userAgent.includes('mac')) {
+            btn.innerHTML = "Not Supported (Download Source)";
+            btn.href = "https://github.com/tilas01/Cyber-ScareCrow";
+            btn.classList.add("btn-outline");
+            
+            sourceBtn.innerHTML = "View Compilation Guide";
+            sourceBtn.href = "https://tilas01.github.io/Cyber-ScareCrow-Wiki";
         }
     </script>
 </body>
