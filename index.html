@@ -3,96 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber-ScareCrow Wiki & Downloads</title>
+    <title>Cyber-ScareCrow Official Wiki</title>
     <style>
-        /* Gruvbox Dark Theme */
+        /* Gruvbox Dark Theme - Mobile & Cross-Browser Optimized */
+        :root {
+            --bg0: #282828; --fg0: #ebdbb2; --orange: #fe8019; --blue: #83a598; 
+            --green: #b8bb26; --red: #fb4934; --bg1: #3c3836;
+        }
         body { 
-            background-color: #282828; 
-            color: #ebdbb2; 
-            font-family: 'Consolas', 'JetBrains Mono', monospace; 
-            text-align: center; 
+            background-color: var(--bg0); 
+            color: var(--fg0); 
+            font-family: 'Consolas', 'JetBrains Mono', 'Courier New', monospace; 
             margin: 0; 
             padding: 20px; 
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        h1 { color: #fe8019; font-size: 2.5rem; margin-bottom: 10px; }
-        h2 { color: #83a598; }
-        p { color: #b8bb26; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .btn { 
-            background-color: #fe8019; 
-            color: #282828; 
-            padding: 15px 30px; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 1.2rem;
-            display: inline-block; 
-            margin: 15px 10px;
-            transition: background-color 0.3s, transform 0.2s;
-            border: 2px solid #fe8019;
-        }
-        .btn:hover { background-color: #d65d0e; border-color: #d65d0e; transform: translateY(-2px); }
-        .btn-outline {
-            background-color: transparent;
-            color: #fe8019;
-        }
-        .btn-outline:hover {
-            background-color: #fe8019;
-            color: #282828;
-        }
-        img.banner { max-width: 100%; height: auto; border-radius: 15px; margin-top: 30px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; background-color: var(--bg0); }
+        .header { text-align: center; margin-bottom: 40px; }
+        h1 { color: var(--orange); font-size: 2.5rem; margin-bottom: 5px; }
+        h2 { color: var(--blue); border-bottom: 2px solid var(--bg1); padding-bottom: 10px; margin-top: 40px;}
+        h3 { color: var(--green); }
+        p, li { color: var(--fg0); font-size: 1.1rem; }
+        ul { padding-left: 20px; }
+        code { background-color: var(--bg1); padding: 2px 6px; border-radius: 4px; color: var(--orange); font-family: inherit;}
+        pre { background-color: var(--bg1); padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #504945; }
+        pre code { background-color: transparent; padding: 0; color: var(--fg0); }
+        
+        .nav-links { text-align: center; margin: 20px 0; padding: 15px; background-color: var(--bg1); border-radius: 8px; }
+        .nav-links a { color: var(--orange); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1rem; transition: color 0.2s;}
+        .nav-links a:hover { text-decoration: underline; color: var(--fg0); }
+        
+        img.banner { max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px; }
         img.icon { max-width: 120px; border-radius: 20px; margin-bottom: 10px; }
-        .links a { color: #83a598; text-decoration: none; margin: 0 10px; }
-        .links a:hover { text-decoration: underline; color: #fe8019; }
         
         /* Mobile Compatibility */
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
-            .btn { width: 100%; box-sizing: border-box; margin: 10px 0; }
+            .nav-links a { display: block; margin: 10px 0; }
+            .container { padding: 10px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="icon.png" alt="Cyber-ScareCrow Icon" class="icon">
-        <h1>Cyber-ScareCrow</h1>
-        <p>100% Libre Offline Active-Analysis Defensive Suite.</p>
-        
-        <noscript>
-            <p style="color: #fb4934; border: 1px solid #fb4934; padding: 10px;">JavaScript is disabled. Manual download links are provided below.</p>
-        </noscript>
+        <div class="header">
+            <img src="icon.png" alt="Cyber-ScareCrow Icon" class="icon">
+            <h1>Cyber-ScareCrow Wiki</h1>
+            <p style="color: var(--green);">Official Documentation & Setup Guide</p>
+        </div>
 
-        <div id="download-section">
-            <a href="https://github.com/tilas01/Cyber-ScareCrow-Server/releases/latest/download/Cyber-ScareCrow-Release.zip" id="download-btn" class="btn">Download Latest Release</a>
-            <a href="https://github.com/tilas01/Cyber-ScareCrow" id="source-btn" class="btn btn-outline">Build from Source</a>
+        <div class="nav-links">
+            <a href="https://tilas01.github.io/Cyber-ScareCrow-Server/">📥 Download App</a>
+            <a href="https://github.com/tilas01/Cyber-ScareCrow">💻 Source Code</a>
+            <a href="https://github.com/tilas01/Cyber-ScareCrow-Hub">🕸️ Ecosystem Hub</a>
         </div>
+
+        <h2>🛡️ Core Protection Features</h2>
+        <ul>
+            <li><strong>100% Offline Architecture:</strong> No telemetry, no licensing, no remote tracking. Runs entirely on-device.</li>
+            <li><strong>Virtual Machine Detection:</strong> Utilizes <code>RDTSC</code> timing spoofing to detect if it's running inside a hostile hypervisor or malware sandbox.</li>
+            <li><strong>Anti-RAT Video Redirection:</strong> Ring-0 driver intercepts illicit screen capturing and VNC software, looping a black screen or custom decoy image back to the attacker.</li>
+            <li><strong>Self-Healing:</strong> Actively monitors memory for debuggers and reverse-engineering tools scanning for its signature.</li>
+        </ul>
+
+        <h2>⚙️ Compilation & Setup Guide</h2>
+        <p>Cyber-ScareCrow is designed to be reproducibly built from source. You will compile the Rust User-Mode Client and the C-Kernel Driver.</p>
         
-        <div class="links" style="margin-top: 30px;">
-            <a href="https://tilas01.github.io/Cyber-ScareCrow-Wiki">Documentation / Wiki</a> | 
-            <a href="https://github.com/tilas01/Cyber-ScareCrow-Hub">Architecture Hub</a>
+        <h3>1. Windows Client (Rust)</h3>
+        <p>The client orchestrates the telemetry parsing and coordinates with the driver.</p>
+        <pre><code># Install Rustup & VS Build Tools 2022
+cd src\client
+cargo build --release
+# Output: target\release\cyber-scarecrow.exe</code></pre>
+
+        <h3>2. Ring-0 Kernel Driver (C / WDK)</h3>
+        <p>The kernel driver handles absolute process isolation and un-bypassable deep hooks.</p>
+        <pre><code># Install Windows Driver Kit (WDK)
+# Open x64 Native Tools Command Prompt
+cd src\driver
+msbuild /p:Configuration=Release /p:Platform=x64
+
+# Enable Test-Signing Mode
+bcdedit /set testsigning on
+# Reboot required.
+
+# Load the Driver
+sc create ScareCrowDriver type= kernel binPath= "C:\path\to\driver.sys"
+sc start ScareCrowDriver</code></pre>
+        
+        <h2>⚖️ Legal & Philosophy</h2>
+        <p>This software is 100% Libre and Open Source. It is provided "as is", without warranty of any kind. It incorporates highly advanced heuristic analysis and NT Kernel process hooks intended strictly for defensive security research and personal threat mitigation.</p>
+        
+        <!-- // TODO: add donation link here (Patreon / Buy Me a Coffee) -->
+
+        <div style="text-align: center; margin-top: 50px;">
+            <img src="banner.png" alt="Cyber-ScareCrow Banner" class="banner">
         </div>
-        
-        <br>
-        <img src="banner.png" alt="Cyber-ScareCrow Banner" class="banner">
     </div>
-
-    <script>
-        const platform = navigator.platform.toLowerCase();
-        const userAgent = navigator.userAgent.toLowerCase();
-        const btn = document.getElementById('download-btn');
-        const sourceBtn = document.getElementById('source-btn');
-        
-        if (platform.includes('win') || userAgent.includes('windows')) {
-            btn.innerHTML = "Download for Windows (x64)";
-        } else if (platform.includes('linux') || platform.includes('mac') || userAgent.includes('linux') || userAgent.includes('mac')) {
-            btn.innerHTML = "Not Supported (Download Source)";
-            btn.href = "https://github.com/tilas01/Cyber-ScareCrow";
-            btn.classList.add("btn-outline");
-            
-            sourceBtn.innerHTML = "View Compilation Guide";
-            sourceBtn.href = "https://tilas01.github.io/Cyber-ScareCrow-Wiki";
-        }
-    </script>
 </body>
 </html>
