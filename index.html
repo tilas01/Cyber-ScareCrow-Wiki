@@ -4,103 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber-ScareCrow Official Wiki</title>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        /* Gruvbox Dark Theme - Mobile & Cross-Browser Optimized */
+        /* Gruvbox Dark Theme */
         :root {
             --bg0: #282828; --fg0: #ebdbb2; --orange: #fe8019; --blue: #83a598; 
-            --green: #b8bb26; --red: #fb4934; --bg1: #3c3836;
+            --green: #b8bb26; --red: #fb4934; --bg1: #3c3836; --bg2: #504945;
         }
         body { 
             background-color: var(--bg0); 
             color: var(--fg0); 
-            font-family: 'Consolas', 'JetBrains Mono', 'Courier New', monospace; 
+            font-family: 'Consolas', 'JetBrains Mono', monospace; 
             margin: 0; 
-            padding: 20px; 
-            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; background-color: var(--bg0); }
-        .header { text-align: center; margin-bottom: 40px; }
-        h1 { color: var(--orange); font-size: 2.5rem; margin-bottom: 5px; }
-        h2 { color: var(--blue); border-bottom: 2px solid var(--bg1); padding-bottom: 10px; margin-top: 40px;}
-        h3 { color: var(--green); }
-        p, li { color: var(--fg0); font-size: 1.1rem; }
-        ul { padding-left: 20px; }
-        code { background-color: var(--bg1); padding: 2px 6px; border-radius: 4px; color: var(--orange); font-family: inherit;}
-        pre { background-color: var(--bg1); padding: 15px; border-radius: 8px; overflow-x: auto; border: 1px solid #504945; }
-        pre code { background-color: transparent; padding: 0; color: var(--fg0); }
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg1);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid var(--bg2);
+            box-sizing: border-box;
+        }
+        .sidebar img { max-width: 100%; border-radius: 15px; margin-bottom: 20px; }
+        .sidebar h2 { color: var(--orange); font-size: 1.4rem; margin-bottom: 20px; text-align: center;}
+        .nav-item {
+            display: block;
+            color: var(--blue);
+            text-decoration: none;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: bold;
+        }
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--bg2);
+            color: var(--orange);
+        }
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background-color: var(--bg0);
+        }
+        .content-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
         
-        .nav-links { text-align: center; margin: 20px 0; padding: 15px; background-color: var(--bg1); border-radius: 8px; }
-        .nav-links a { color: var(--orange); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1rem; transition: color 0.2s;}
-        .nav-links a:hover { text-decoration: underline; color: var(--fg0); }
+        /* Markdown Rendering Styles */
+        .content h1 { color: var(--orange); border-bottom: 2px solid var(--bg2); padding-bottom: 10px; font-size: 2.5rem;}
+        .content h2 { color: var(--blue); margin-top: 40px; font-size: 1.8rem;}
+        .content h3 { color: var(--green); font-size: 1.4rem;}
+        .content p, .content li { font-size: 1.1rem; line-height: 1.7; }
+        .content a { color: var(--orange); text-decoration: none; }
+        .content a:hover { text-decoration: underline; }
+        .content code { background-color: var(--bg1); padding: 3px 6px; border-radius: 4px; color: var(--fg0); font-family: inherit;}
+        .content pre { background-color: var(--bg1); padding: 20px; border-radius: 8px; overflow-x: auto; border: 1px solid var(--bg2); }
+        .content pre code { background-color: transparent; padding: 0; }
+        .content img { max-width: 100%; border-radius: 10px; margin-top: 20px;}
         
-        img.banner { max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px; }
-        img.icon { max-width: 120px; border-radius: 20px; margin-bottom: 10px; }
+        /* Mobile Toggle */
+        .mobile-header { display: none; background-color: var(--bg1); padding: 15px 20px; color: var(--orange); font-weight: bold; font-size: 1.2rem; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--bg2);}
+        .menu-btn { background: none; border: none; color: var(--orange); font-size: 1.8rem; cursor: pointer; }
         
-        /* Mobile Compatibility */
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .nav-links a { display: block; margin: 10px 0; }
-            .container { padding: 10px; }
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; height: auto; }
+            .mobile-header { display: flex; }
+            .sidebar { width: 100%; display: none; border-right: none; border-bottom: 2px solid var(--bg2); }
+            .sidebar.open { display: block; }
+            .content { padding: 20px; overflow: visible; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="icon.png" alt="Cyber-ScareCrow Icon" class="icon">
-            <h1>Cyber-ScareCrow Wiki</h1>
-            <p style="color: var(--green);">Official Documentation & Setup Guide</p>
+
+    <div class="mobile-header">
+        <span>Cyber-ScareCrow Wiki</span>
+        <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div style="text-align: center;">
+            <img src="icon.png" alt="Cyber-ScareCrow">
+            <h2>Ecosystem Wiki</h2>
         </div>
-
-        <div class="nav-links">
-            <a href="https://tilas01.github.io/Cyber-ScareCrow-Server/">📥 Download App</a>
-            <a href="https://github.com/tilas01/Cyber-ScareCrow">💻 Source Code</a>
-            <a href="https://github.com/tilas01/Cyber-ScareCrow-Hub">🕸️ Ecosystem Hub</a>
-        </div>
-
-        <h2>🛡️ Core Protection Features</h2>
-        <ul>
-            <li><strong>100% Offline Architecture:</strong> No telemetry, no licensing, no remote tracking. Runs entirely on-device.</li>
-            <li><strong>Virtual Machine Detection:</strong> Utilizes <code>RDTSC</code> timing spoofing to detect if it's running inside a hostile hypervisor or malware sandbox.</li>
-            <li><strong>Anti-RAT Video Redirection:</strong> Ring-0 driver intercepts illicit screen capturing and VNC software, looping a black screen or custom decoy image back to the attacker.</li>
-            <li><strong>Self-Healing:</strong> Actively monitors memory for debuggers and reverse-engineering tools scanning for its signature.</li>
-        </ul>
-
-        <h2>⚙️ Compilation & Setup Guide</h2>
-        <p>Cyber-ScareCrow is designed to be reproducibly built from source. You will compile the Rust User-Mode Client and the C-Kernel Driver.</p>
         
-        <h3>1. Windows Client (Rust)</h3>
-        <p>The client orchestrates the telemetry parsing and coordinates with the driver.</p>
-        <pre><code># Install Rustup & VS Build Tools 2022
-cd src\client
-cargo build --release
-# Output: target\release\cyber-scarecrow.exe</code></pre>
-
-        <h3>2. Ring-0 Kernel Driver (C / WDK)</h3>
-        <p>The kernel driver handles absolute process isolation and un-bypassable deep hooks.</p>
-        <pre><code># Install Windows Driver Kit (WDK)
-# Open x64 Native Tools Command Prompt
-cd src\driver
-msbuild /p:Configuration=Release /p:Platform=x64
-
-# Enable Test-Signing Mode
-bcdedit /set testsigning on
-# Reboot required.
-
-# Load the Driver
-sc create ScareCrowDriver type= kernel binPath= "C:\path\to\driver.sys"
-sc start ScareCrowDriver</code></pre>
+        <a class="nav-item active" onclick="loadDoc('README.md', this)">🏠 Welcome Overview</a>
+        <a class="nav-item" onclick="loadDoc('FEATURES.md', this)">🛡️ Core Features</a>
+        <a class="nav-item" onclick="loadDoc('DEVELOPMENT_GUIDE.md', this)">⚙️ Compilation Guide</a>
         
-        <h2>⚖️ Legal & Philosophy</h2>
-        <p>This software is 100% Libre and Open Source. It is provided "as is", without warranty of any kind. It incorporates highly advanced heuristic analysis and NT Kernel process hooks intended strictly for defensive security research and personal threat mitigation.</p>
-        
-        <!-- // TODO: add donation link here (Patreon / Buy Me a Coffee) -->
-
-        <div style="text-align: center; margin-top: 50px;">
-            <img src="banner.png" alt="Cyber-ScareCrow Banner" class="banner">
+        <div style="margin-top: 40px; border-top: 2px solid var(--bg2); padding-top: 20px;">
+            <a href="https://tilas01.github.io/Cyber-ScareCrow-Server/" class="nav-item" style="color: var(--green);">📥 Download App</a>
+            <a href="https://github.com/tilas01/Cyber-ScareCrow-Hub" class="nav-item" style="color: var(--green);">🕸️ Architecture Hub</a>
         </div>
     </div>
+
+    <div class="content" id="main-content">
+        <div class="content-inner" id="markdown-container">
+            <!-- Markdown loads here -->
+            <h2 style="color: var(--orange);">Loading Wiki Data...</h2>
+        </div>
+    </div>
+
+    <script>
+        async function loadDoc(file, element) {
+            // Update active state
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            if(element) element.classList.add('active');
+            
+            if(window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+
+            const container = document.getElementById('markdown-container');
+            container.innerHTML = '<h2 style="color: var(--orange);">Loading data from GitHub...</h2>';
+            
+            try {
+                // Fetch the raw markdown file directly from the local Pages environment
+                const response = await fetch(file);
+                if (!response.ok) throw new Error('File not found');
+                const text = await response.text();
+                
+                // Parse with Marked.js
+                container.innerHTML = marked.parse(text);
+                
+                // Fix relative image links natively 
+                container.querySelectorAll('img').forEach(img => {
+                    const src = img.getAttribute('src');
+                    if(src === 'icon.png' || src === 'banner.png') {
+                        img.src = src; 
+                    }
+                });
+                
+            } catch (error) {
+                container.innerHTML = `<h2 style="color: var(--red);">Error loading ${file}</h2><p>Please ensure you are connected to the internet and the file exists in the repository. (${error})</p>`;
+            }
+        }
+
+        // Initialize default
+        window.onload = () => loadDoc('README.md', document.querySelector('.nav-item'));
+    </script>
 </body>
 </html>
